@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Posts;
-use App\Categories;
+use App\Post;
+use App\Categorie;
 
-class PostsController extends Controller
+class PostController extends Controller
 {
     public function index()
     {
-        $posts = Posts::latest()->paginate(10);
-        $categories = Categories::latest()->get();
+        $posts = Post::latest()->paginate(10);
+        $categories = Categorie::latest()->get();
 
-        
+        // dd(auth()->user());
         return view('admin.dashboard', ['posts' => $posts, 'categories' => $categories]);
 
     }
 
     public function posts()
     {
-        $posts = Posts::latest()->paginate(10);
+        $posts = Post::latest()->paginate(10);
 
         return view('admin.posts', ['posts' => $posts]);
 
@@ -36,25 +36,25 @@ class PostsController extends Controller
             'body' => 'required'
         ]);
 
-        Posts::create($validatedPost);
+        Post::create($validatedPost);
 
         return redirect('/posts');
 
     }
 
-    public function edit(Posts $post) // // Laravel noķer wildcard, to, kas aiz / piem. 999 un tad uatomātiski
+    public function edit(Post $post) // // Laravel noķer wildcard, to, kas aiz / piem. 999 un tad uatomātiski
     // dara šādi Posts::where('id' 999)->first(); Līdz ar to iegūstam vajadzīgo postu meklējot pēc ID.
 
     {
         // Show a view to edit an existing resource
 
-        $categories = Categories::latest()->get();
+        $categories = Categorie::latest()->get();
         
         return view('admin.edit-posts', ['post' => $post, 'categories' => $categories]);
 
     }
 
-    public function update(Posts $post) // // Laravel noķer wildcard, to, kas aiz / piem. 999 un tad uatomātiski
+    public function update(Post $post) // // Laravel noķer wildcard, to, kas aiz / piem. 999 un tad uatomātiski
     // dara šādi Posts::where('id' 999)->first(); Līdz ar to iegūstam vajadzīgo postu meklējot pēc ID.
     {
         // Persist(save) the edited resource
@@ -82,7 +82,7 @@ class PostsController extends Controller
         return view('admin.settings');
     }
 
-    public function destroy(Posts $post)
+    public function destroy(Post $post)
     {
         $post->delete();
 
@@ -96,7 +96,7 @@ class PostsController extends Controller
             ['required' => 'Seach field was epty']);
 
         $search = $request->get('search');
-        $results = Posts::where('title', 'LIKE', "%{$search}%")->paginate(10);
+        $results = Post::where('title', 'LIKE', "%{$search}%")->paginate(10);
        
         if(count($results) > 0)
         {

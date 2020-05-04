@@ -46,7 +46,14 @@
                 class="nav-link dropdown-toggle"
                 data-toggle="dropdown"
               >
-                <i class="fas fa-user"></i> Welcome Martins
+                <i class="fas fa-user"></i>
+                 Welcome
+                 @auth
+                  {{(Auth::user()->name)}} 
+                 @endauth  
+                 @guest
+                    Guest
+                 @endguest
               </a>
               <div class="dropdown-menu">
                 <a href="/blogproject/public/profile" class="dropdown-item">
@@ -58,7 +65,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a href="login.html" class="nav-link">
+            <a href="{{route('logout')}}" class="nav-link">
                 <i class="fas fa-user-times"></i> Logout
               </a>
             </li>

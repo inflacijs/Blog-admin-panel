@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
     public function index()
     {
+        // dd(auth()->user());
         $users = User::latest()->paginate(10);
         return view('admin.users', ['users' => $users]);
     }
@@ -16,8 +18,8 @@ class UserController extends Controller
     public function store()
     {
         $validatedUser = request()->validate([
-            'name' => 'required',
-            'email' => 'required',
+            'name' => ['string', 'required', 'max:255'],
+            'email' => ['string', 'required', 'max:255', 'email', Rule::unique('users')],
             'password' => 'required'
         ]);
         

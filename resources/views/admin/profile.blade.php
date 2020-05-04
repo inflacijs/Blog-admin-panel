@@ -2,13 +2,15 @@
 
 @section ('header')
 
+
+
     <!-- HEADER -->
   <header id="main-header" class="py-2 bg-primary text-white">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
           <h1>
-            Post One</h1>
+            Profile info</h1>
         </div>
       </div>
     </div>
@@ -55,17 +57,24 @@
               <form>
                 <div class="form-group">
                   <label for="title">Name</label>
-                  <input type="text" class="form-control" value="Martins Locans">
+                  <input type="text" class="form-control" value="{{$user->name}}">
                 </div>
                 <div class="form-group">
                     <label for="title">Email</label>
-                    <input type="email" class="form-control" value="inflacijs@gmail.com">
+                    <input type="email" class="form-control" value="{{$user->email}}">
                   </div>
                 
                 <div class="form-group">
-                  <label for="body">Bio</label>
-                  <textarea name="editor1" class="form-control">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat culpa nam cumque voluptatum. Possimus recusandae porro architecto officiis illo dignissimos ratione aut officia reprehenderit! Iure cum numquam fugit doloremque quis ullam illo odit, odio voluptates non quisquam laboriosam consectetur quasi perspiciatis! Sapiente minus aperiam nobis molestias autem ut praesentium laudantium?</textarea>
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control">
                 </div>
+
+                <div class="form-group">
+                  <label for="password2">Password</label>
+                  <input type="password2" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
               </form>
             </div>
           </div>
